@@ -1,14 +1,16 @@
 import { Movie } from '../../types/movie'
 import MovieCard from '../MovieCard/MovieCard'
+import { RefObject } from 'react'
 
 interface MovieListProps {
   movies: Movie[]
   loading: boolean
   error: string | null
   onPosterClick: (movie: Movie) => void
+  loadMoreRef?: RefObject<HTMLDivElement>
 }
 
-function MovieList({ movies, loading, error, onPosterClick }: MovieListProps) {
+function MovieList({ movies, loading, error, onPosterClick, loadMoreRef }: MovieListProps) {
   if (loading && movies.length === 0) {
     return <p>Loading...</p>
   }
@@ -30,6 +32,7 @@ function MovieList({ movies, loading, error, onPosterClick }: MovieListProps) {
           onPosterClick={onPosterClick}
         />
       ))}
+      <div ref={loadMoreRef} />
       {loading && <p>Loading more...</p>}
     </div>
   )
