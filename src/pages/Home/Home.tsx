@@ -1,16 +1,17 @@
-import { searchMovies } from '../../api/omdbApi'
+import SearchBox from '../../components/SearchBox/SearchBox'
+import { useAppSelector } from '../../hooks/redux'
 
 function Home() {
-  const handleTestSearch = async () => {
-    const result = await searchMovies('Batman', 1)
-    console.log('Search result:', result)
-  }
+  const searchQuery = useAppSelector((state) => state.movies.searchQuery)
 
   return (
     <div>
-      <input type="text" placeholder="Search movies..." />
-      <button onClick={handleTestSearch}>Test Search API</button>
-      <p>Start searching to find movies</p>
+      <SearchBox />
+      {searchQuery ? (
+        <p>Searching for: {searchQuery}</p>
+      ) : (
+        <p>Start searching to find movies</p>
+      )}
     </div>
   )
 }
