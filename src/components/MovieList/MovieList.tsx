@@ -1,13 +1,12 @@
 import { Movie } from '../../types/movie'
 import MovieCard from '../MovieCard/MovieCard'
-import { RefObject } from 'react'
 
 interface MovieListProps {
   movies: Movie[]
   loading: boolean
   error: string | null
   onPosterClick: (movie: Movie) => void
-  loadMoreRef?: RefObject<HTMLDivElement>
+  loadMoreRef?: (node: HTMLDivElement | null) => void
 }
 
 function MovieList({ movies, loading, error, onPosterClick, loadMoreRef }: MovieListProps) {
