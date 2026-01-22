@@ -1,24 +1,18 @@
-import { searchMovies } from './api/omdbApi'
+import { BrowserRouter, Routes, Route } from 'react-router-dom'
+import Layout from './layouts/Layout'
+import Home from './pages/Home/Home'
+import MovieDetail from './pages/MovieDetail/MovieDetail'
 
 function App() {
-  
-  const handleTestSearch = async () => {
-    const result = await searchMovies('Batman', 1)
-    console.log('Search result:', result)
-  }
-
   return (
-    <div>
-      <header>
-        <h1>OMDB Explorer</h1>
-        <p>Search and discover movies</p>
-      </header>
-      <main>
-        <input type="text" placeholder="Search movies..." />
-        <button onClick={handleTestSearch}>Test Search API</button>
-        <p>Start searching to find movies</p>
-      </main>
-    </div>
+    <BrowserRouter>
+      <Routes>
+        <Route path="/" element={<Layout />}>
+          <Route index element={<Home />} />
+          <Route path="movie/:id" element={<MovieDetail />} />
+        </Route>
+      </Routes>
+    </BrowserRouter>
   )
 }
 
