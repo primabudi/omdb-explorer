@@ -1,12 +1,13 @@
 import { useState, useEffect } from 'react'
-import { useAppDispatch } from '../../hooks/redux'
+import { useAppDispatch, useAppSelector } from '../../hooks/redux'
 import { setSearchQuery } from '../../features/movies/moviesSlice'
 import useDebounce from '../../hooks/useDebounce'
 
 function SearchBox() {
-  const [inputValue, setInputValue] = useState('')
-  const debouncedValue = useDebounce(inputValue, 300)
   const dispatch = useAppDispatch()
+  const searchQuery = useAppSelector((state) => state.movies.searchQuery)
+  const [inputValue, setInputValue] = useState(searchQuery)
+  const debouncedValue = useDebounce(inputValue, 300)
 
   useEffect(() => {
     dispatch(setSearchQuery(debouncedValue))
@@ -29,3 +30,4 @@ function SearchBox() {
 }
 
 export default SearchBox
+
