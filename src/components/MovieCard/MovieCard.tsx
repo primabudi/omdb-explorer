@@ -1,3 +1,4 @@
+import { useState } from 'react'
 import { Link } from 'react-router-dom'
 import { Movie } from '../../types/movie'
 import s from './MovieCard.module.css'
@@ -8,12 +9,16 @@ interface MovieCardProps {
 }
 
 function MovieCard({ movie, onPosterClick }: MovieCardProps) {
+  const [imageError, setImageError] = useState(false)
+  
   const handlePosterClick = (e: React.MouseEvent) => {
     e.preventDefault()
     onPosterClick(movie)
   }
 
-  const posterSrc = movie.Poster !== 'N/A' ? movie.Poster : '/placeholder.svg'
+  const posterSrc = movie.Poster !== 'N/A' && !imageError 
+    ? movie.Poster 
+    : '/placeholder.svg'
 
   return (
     <div className={s.card}>
@@ -21,6 +26,7 @@ function MovieCard({ movie, onPosterClick }: MovieCardProps) {
         src={posterSrc}
         alt={movie.Title}
         onClick={handlePosterClick}
+        onError={() => setImageError(true)}
         className={s.poster}
       />
       <div className={s.info}>
