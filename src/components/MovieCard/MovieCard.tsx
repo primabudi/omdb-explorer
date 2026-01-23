@@ -29,13 +29,13 @@ function MovieCard({ movie, onPosterClick }: MovieCardProps) {
         onError={() => setImageError(true)}
         className={s.poster}
       />
-      <div className={s.info}>
-        <h3 className={s.title}>
-          <Link to={`/movie/${movie.imdbID}`}>{movie.Title}</Link>
-        </h3>
-        <p className={s.year}>{movie.Year}</p>
-        <span className={s.type}>{movie.Type}</span>
-      </div>
+      <Link to={`/movie/${movie.imdbID}`}>
+        <div className={s.info}>
+          <h3 className={s.title}>{movie.Title}</h3>
+          <p className={s.year}>{movie.Year}</p>
+          <span className={s.type}>{movie.Type}</span>
+        </div>
+      </Link>
     </div>
   )
 }
