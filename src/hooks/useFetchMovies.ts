@@ -10,7 +10,10 @@ function useFetchMovies() {
   const hasMoreMovies = movies.length < totalResults
 
   const fetchMovies = useCallback(async (query: string, page: number, isNewSearch: boolean) => {
-    if (!query.trim()) {
+    const trimmedQuery = query.trim()
+    
+    // only request to OMDB API when query is at least 3 characters
+    if (trimmedQuery.length < 3) {
       dispatch(setMovies({ movies: [], totalResults: 0 }))
       return
     }

@@ -27,10 +27,18 @@ function Home() {
     setSelectedMovie(null)
   }
 
+  const showMinCharMessage = searchQuery.length > 0 && searchQuery.length < 3
+
   return (
     <div>
       <SearchBox />
-      {searchQuery ? (
+      {!searchQuery && (
+        <p>Start searching to find movies</p>
+      )}
+      {showMinCharMessage && (
+        <p>Type at least 3 characters to search</p>
+      )}
+      {searchQuery.length >= 3 && (
         <MovieList
           movies={movies}
           loading={loading}
@@ -38,8 +46,6 @@ function Home() {
           onPosterClick={handlePosterClick}
           loadMoreRef={targetRef}
         />
-      ) : (
-        <p>Start searching to find movies</p>
       )}
 
       <PosterModal
