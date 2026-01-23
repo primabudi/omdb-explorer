@@ -1,5 +1,6 @@
 import { Movie } from '../../types/movie'
 import MovieCard from '../MovieCard/MovieCard'
+import s from './MovieList.module.css'
 
 interface MovieListProps {
   movies: Movie[]
@@ -11,28 +12,30 @@ interface MovieListProps {
 
 function MovieList({ movies, loading, error, onPosterClick, loadMoreRef }: MovieListProps) {
   if (loading && movies.length === 0) {
-    return <p>Loading...</p>
+    return <p className={s.loading}>Loading...</p>
   }
 
   if (error) {
-    return <p>Error: {error}</p>
+    return <p className={s.error}>Error: {error}</p>
   }
 
   if (movies.length === 0) {
-    return <p>No movies found</p>
+    return <p className={s.empty}>No movies found</p>
   }
 
   return (
     <div>
-      {movies.map((movie) => (
-        <MovieCard
-          key={movie.imdbID}
-          movie={movie}
-          onPosterClick={onPosterClick}
-        />
-      ))}
+      <div className={s.grid}>
+        {movies.map((movie) => (
+          <MovieCard
+            key={movie.imdbID}
+            movie={movie}
+            onPosterClick={onPosterClick}
+          />
+        ))}
+      </div>
       <div ref={loadMoreRef} />
-      {loading && <p>Loading more...</p>}
+      {loading && <p className={s.loading}>Loading more...</p>}
     </div>
   )
 }

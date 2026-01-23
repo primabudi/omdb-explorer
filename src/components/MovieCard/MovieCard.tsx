@@ -1,5 +1,6 @@
 import { Link } from 'react-router-dom'
 import { Movie } from '../../types/movie'
+import s from './MovieCard.module.css'
 
 interface MovieCardProps {
   movie: Movie
@@ -15,19 +16,19 @@ function MovieCard({ movie, onPosterClick }: MovieCardProps) {
   const posterSrc = movie.Poster !== 'N/A' ? movie.Poster : '/placeholder.svg'
 
   return (
-    <div>
+    <div className={s.card}>
       <img
         src={posterSrc}
         alt={movie.Title}
         onClick={handlePosterClick}
-        style={{ cursor: 'pointer' }}
+        className={s.poster}
       />
-      <div>
-        <Link to={`/movie/${movie.imdbID}`}>
-          <h3>{movie.Title}</h3>
-        </Link>
-        <p>{movie.Year}</p>
-        <span>{movie.Type}</span>
+      <div className={s.info}>
+        <h3 className={s.title}>
+          <Link to={`/movie/${movie.imdbID}`}>{movie.Title}</Link>
+        </h3>
+        <p className={s.year}>{movie.Year}</p>
+        <span className={s.type}>{movie.Type}</span>
       </div>
     </div>
   )

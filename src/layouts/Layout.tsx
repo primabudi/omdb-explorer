@@ -1,11 +1,12 @@
 import { Outlet } from 'react-router-dom'
 import Header from '../components/Header/Header'
+import s from './Layout.module.css'
 
 function Layout() {
   return (
-    <div>
+    <div className={s.container}>
       <Header />
-      <main>
+      <main className={s.main}>
         <Outlet />
       </main>
     </div>
@@ -13,3 +14,4 @@ function Layout() {
 }
 
 export default Layout
+

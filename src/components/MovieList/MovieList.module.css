@@ -1,0 +1,24 @@
+.grid {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 20px;
+  padding: 20px 0;
+}
+
+.loading {
+  text-align: center;
+  color: #888;
+  padding: 20px;
+}
+
+.error {
+  text-align: center;
+  color: #f87171;
+  padding: 20px;
+}
+
+.empty {
+  text-align: center;
+  color: #888;
+  padding: 40px;
+}
