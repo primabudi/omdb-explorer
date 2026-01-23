@@ -1,5 +1,6 @@
 import { useParams, Link } from 'react-router-dom'
 import useFetchMovieDetail from '../../hooks/useFetchMovieDetail'
+import s from './MovieDetail.module.css'
 
 function MovieDetail() {
   const { id } = useParams<{ id: string }>()
@@ -7,27 +8,27 @@ function MovieDetail() {
 
   if (loading) {
     return (
-      <div>
-        <Link to="/">← Back to Search</Link>
-        <p>Loading movie details...</p>
+      <div className={s.container}>
+        <Link to="/" className={s.backLink}>← Back to Search</Link>
+        <p className={s.loading}>Loading movie details...</p>
       </div>
     )
   }
 
   if (error) {
     return (
-      <div>
-        <Link to="/">← Back to Search</Link>
-        <p>Error: {error}</p>
+      <div className={s.container}>
+        <Link to="/" className={s.backLink}>← Back to Search</Link>
+        <p className={s.error}>Error: {error}</p>
       </div>
     )
   }
 
   if (!movie) {
     return (
-      <div>
-        <Link to="/">← Back to Search</Link>
-        <p>Movie not found</p>
+      <div className={s.container}>
+        <Link to="/" className={s.backLink}>← Back to Search</Link>
+        <p className={s.error}>Movie not found</p>
       </div>
     )
   }
@@ -36,76 +37,75 @@ function MovieDetail() {
   const hasValidPoster = movie.Poster && movie.Poster !== 'N/A'
 
   return (
-    <div>
-      <Link to="/">← Back to Search</Link>
+    <div className={s.container}>
+      <Link to="/" className={s.backLink}>← Back to Search</Link>
       
-      <div>
-        {hasValidPoster ? (
-          <img 
-            src={movie.Poster} 
-            alt={movie.Title} 
-            style={{ maxWidth: '300px' }}
-          />
-        ) : (
-          <div>No Poster Available</div>
-        )}
-      </div>
-
-      <h1>{movie.Title}</h1>
-      
-      <p>
-        {movie.Year} • {movie.Rated} • {movie.Runtime} • {movie.Type}
-      </p>
-
-      {genres.length > 0 && (
-        <p>Genres: {genres.join(', ')}</p>
-      )}
-
-      {movie.Plot && movie.Plot !== 'N/A' && (
+      <div className={s.content}>
         <div>
-          <h3>Plot</h3>
-          <p>{movie.Plot}</p>
+          {hasValidPoster ? (
+            <img src={movie.Poster} alt={movie.Title} className={s.poster} />
+          ) : (
+            <div className={s.fallback}>No Poster Available</div>
+          )}
         </div>
-      )}
 
-      <div>
-        {movie.Director && movie.Director !== 'N/A' && (
-          <p><strong>Director:</strong> {movie.Director}</p>
-        )}
-        {movie.Writer && movie.Writer !== 'N/A' && (
-          <p><strong>Writer:</strong> {movie.Writer}</p>
-        )}
-        {movie.Actors && movie.Actors !== 'N/A' && (
-          <p><strong>Cast:</strong> {movie.Actors}</p>
-        )}
-      </div>
-
-      {movie.Ratings && movie.Ratings.length > 0 && (
         <div>
-          <h3>Ratings</h3>
-          <ul>
-            {movie.Ratings.map((rating) => (
-              <li key={rating.Source}>
-                {rating.Source}: {rating.Value}
-              </li>
-            ))}
-          </ul>
-        </div>
-      )}
+          <h1 className={s.title}>{movie.Title}</h1>
+          <p className={s.meta}>
+            {movie.Year} • {movie.Rated} • {movie.Runtime} • {movie.Type}
+          </p>
 
-      <div>
-        {movie.BoxOffice && movie.BoxOffice !== 'N/A' && (
-          <p><strong>Box Office:</strong> {movie.BoxOffice}</p>
-        )}
-        {movie.Awards && movie.Awards !== 'N/A' && (
-          <p><strong>Awards:</strong> {movie.Awards}</p>
-        )}
-        {movie.Country && movie.Country !== 'N/A' && (
-          <p><strong>Country:</strong> {movie.Country}</p>
-        )}
-        {movie.Language && movie.Language !== 'N/A' && (
-          <p><strong>Language:</strong> {movie.Language}</p>
-        )}
+          {genres.length > 0 && (
+            <p className={s.genres}>Genres: {genres.join(', ')}</p>
+          )}
+
+          {movie.Plot && movie.Plot !== 'N/A' && (
+            <div className={s.section}>
+              <h3 className={s.sectionTitle}>Plot</h3>
+              <p className={s.plot}>{movie.Plot}</p>
+            </div>
+          )}
+
+          <div className={s.credits}>
+            {movie.Director && movie.Director !== 'N/A' && (
+              <p><strong>Director:</strong> {movie.Director}</p>
+            )}
+            {movie.Writer && movie.Writer !== 'N/A' && (
+              <p><strong>Writer:</strong> {movie.Writer}</p>
+            )}
+            {movie.Actors && movie.Actors !== 'N/A' && (
+              <p><strong>Cast:</strong> {movie.Actors}</p>
+            )}
+          </div>
+
+          {movie.Ratings && movie.Ratings.length > 0 && (
+            <div className={s.section}>
+              <h3 className={s.sectionTitle}>Ratings</h3>
+              <ul className={s.ratingsList}>
+                {movie.Ratings.map((rating) => (
+                  <li key={rating.Source} className={s.ratingItem}>
+                    {rating.Source}: {rating.Value}
+                  </li>
+                ))}
+              </ul>
+            </div>
+          )}
+
+          <div className={s.additional}>
+            {movie.BoxOffice && movie.BoxOffice !== 'N/A' && (
+              <p><strong>Box Office:</strong> {movie.BoxOffice}</p>
+            )}
+            {movie.Awards && movie.Awards !== 'N/A' && (
+              <p><strong>Awards:</strong> {movie.Awards}</p>
+            )}
+            {movie.Country && movie.Country !== 'N/A' && (
+              <p><strong>Country:</strong> {movie.Country}</p>
+            )}
+            {movie.Language && movie.Language !== 'N/A' && (
+              <p><strong>Language:</strong> {movie.Language}</p>
+            )}
+          </div>
+        </div>
       </div>
     </div>
   )
