@@ -46,7 +46,7 @@ yarn test
 
 ## Features
 
-- Search movies (min 3 chars)
+- Search movies with autocomplete (min 3 chars)
 - Infinite scroll
 - Movie detail page
 - Poster popup
