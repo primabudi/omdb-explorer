@@ -1,5 +1,6 @@
 import { Movie } from '../../types/movie'
 import MovieCard from '../MovieCard/MovieCard'
+import MovieCardSkeleton from '../Skeleton/MovieCardSkeleton'
 import s from './MovieList.module.css'
 
 interface MovieListProps {
@@ -12,7 +13,13 @@ interface MovieListProps {
 
 function MovieList({ movies, loading, error, onPosterClick, loadMoreRef }: MovieListProps) {
   if (loading && movies.length === 0) {
-    return <p className={s.loading}>Loading...</p>
+    return (
+      <div className={s.grid}>
+        {[...Array(5)].map((_, i) => (
+          <MovieCardSkeleton key={i} />
+        ))}
+      </div>
+    )
   }
 
   if (error) {
@@ -33,9 +40,11 @@ function MovieList({ movies, loading, error, onPosterClick, loadMoreRef }: Movie
             onPosterClick={onPosterClick}
           />
         ))}
+        {loading && [...Array(5)].map((_, i) => (
+          <MovieCardSkeleton key={`skeleton-${i}`} />
+        ))}
       </div>
       <div ref={loadMoreRef} />
-      {loading && <p className={s.loading}>Loading more...</p>}
     </div>
   )
 }
