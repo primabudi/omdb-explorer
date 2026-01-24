@@ -1,4 +1,24 @@
-# OMDB Explorer
+# Take Home Test Solutions
+
+## 1. Logic Test (Anagram)
+
+Group array of strings into anagram groups.
+
+**How to run:**
+
+```bash
+node logic-test.js
+```
+
+**Output:**
+
+```js
+[["kita", "atik", "tika"], ["aku", "kua"], ["kia"], ["makan"]];
+```
+
+---
+
+## 2. OMDB Explorer (React App)
 
 Simple react app to search movies and see movie detail using OMDB API.
 
@@ -7,7 +27,23 @@ Simple react app to search movies and see movie detail using OMDB API.
 ![Movie List](public/movie-list.png)
 ![Movie Detail](public/movie-detail.png)
 
-## How to run
+### Features
+
+- Search movies with autocomplete (min 3 chars)
+- Infinite scroll
+- Movie detail page
+- Poster popup
+- Unit testing for components
+
+### Tech Stack
+
+- React + Vite
+- Redux Toolkit
+- Axios
+- Vitest
+- Module CSS
+
+### How to run
 
 1. Install dependencies
 
@@ -34,28 +70,12 @@ VITE_OMDB_API_KEY=your_api_key_here
 yarn dev
 ```
 
-3. Open http://localhost:5173
+4. Open http://localhost:5173
 
-## How to test
+### How to test
 
 Run unit test:
 
 ```bash
 yarn test
 ```
-
-## Features
-
-- Search movies with autocomplete (min 3 chars)
-- Infinite scroll
-- Movie detail page
-- Poster popup
-- Unit testing for components
-
-## Tech Stack
-
-- React + Vite
-- Redux Toolkit
-- Axios
-- Vitest
-- Module CSS
