@@ -1,0 +1,104 @@
+.container {
+  position: relative;
+  width: 100%;
+}
+
+.inputWrapper {
+  display: flex;
+  gap: 8px;
+}
+
+.input {
+  flex: 1;
+  padding: 12px 16px;
+  font-size: 16px;
+  border: 1px solid white;
+  border-radius: 8px;
+  outline: none;
+  background: white;
+  color: #1e1e2e;
+}
+
+.input:focus {
+  border-color: lightskyblue;
+}
+
+.searchButton {
+  padding: 0 20px;
+  background: #1e1e2e;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.searchButton:hover {
+  background: #2a2a3e;
+}
+
+.dropdown {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  right: 0;
+  background: #1e1e2e;
+  border-radius: 8px;
+  margin-top: 4px;
+  max-height: 300px;
+  overflow-y: auto;
+  z-index: 100;
+}
+
+.suggestion {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 10px 16px;
+  cursor: pointer;
+  border-bottom: 1px solid #333;
+}
+
+.suggestion:last-child {
+  border-bottom: none;
+}
+
+.suggestion:hover,
+.suggestionActive {
+  background: #2a2a3e;
+}
+
+.poster {
+  width: 30px;
+  height: 45px;
+  object-fit: cover;
+  border-radius: 4px;
+}
+
+.posterFallback {
+  width: 30px;
+  height: 45px;
+  background: #333;
+  border-radius: 4px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 8px;
+  color: #666;
+}
+
+.info {
+  flex: 1;
+}
+
+.title {
+  color: #fff;
+  font-size: 14px;
+  margin: 0;
+}
+
+.meta {
+  color: #888;
+  font-size: 12px;
+}

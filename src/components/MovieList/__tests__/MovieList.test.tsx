@@ -38,7 +38,7 @@ describe('MovieList', () => {
         onPosterClick={() => {}}
       />
     )
-    expect(screen.getByText('Loading...')).toBeInTheDocument()
+    expect(screen.getAllByTestId('skeleton')).toHaveLength(5)
   })
 
   it('renders error state', () => {

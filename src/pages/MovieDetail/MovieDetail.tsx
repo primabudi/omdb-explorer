@@ -1,4 +1,3 @@
-import { useState } from 'react'
 import { useParams, Link } from 'react-router-dom'
 import useFetchMovieDetail from '../../hooks/useFetchMovieDetail'
 import s from './MovieDetail.module.css'
@@ -6,7 +5,6 @@ import s from './MovieDetail.module.css'
 function MovieDetail() {
   const { id } = useParams<{ id: string }>()
   const { movie, loading, error } = useFetchMovieDetail(id)
-  const [imageError, setImageError] = useState(false)
 
   if (loading) {
     return (
@@ -36,9 +34,6 @@ function MovieDetail() {
   }
 
   const genres = movie.Genre ? movie.Genre.split(', ') : []
-  const posterSrc = movie.Poster !== 'N/A' && !imageError 
-    ? movie.Poster 
-    : '/placeholder.svg'
 
   return (
     <div className={s.container}>
@@ -47,10 +42,13 @@ function MovieDetail() {
       <div className={s.content}>
         <div>
           <img 
-            src={posterSrc} 
+            src={movie.Poster !== 'N/A' ? movie.Poster : '/placeholder.svg'} 
             alt={movie.Title} 
             className={s.poster}
-            onError={() => setImageError(true)}
+            onError={(e) => {
+              const img = e.target as HTMLImageElement
+              img.src = '/placeholder.svg'
+            }}
           />
         </div>
 

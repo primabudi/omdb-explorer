@@ -2,7 +2,7 @@ import s from './MovieCardSkeleton.module.css'
 
 function MovieCardSkeleton() {
   return (
-    <div className={s.card}>
+    <div className={s.card} data-testid="skeleton">
       <div className={s.poster} />
       <div className={s.info}>
         <div className={s.title} />
